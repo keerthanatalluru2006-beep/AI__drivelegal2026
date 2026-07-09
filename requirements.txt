@@ -4,3 +4,4 @@ google-generativeai
 python-dotenv
 psycopg2-binary
 pytesseract
+google-generativeai
