@@ -6,7 +6,7 @@ from fastapi import File, UploadFile
 import io
 from violations_data import find_violation
 from dotenv import load_dotenv
-import google.generativeai as genai
+import google as genai
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
