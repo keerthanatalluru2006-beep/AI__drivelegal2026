@@ -20,20 +20,22 @@ client = genai.Client(api_key=api_key)
 # Tell pytesseract where Tesseract is installed on this Windows machine
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 # IMPORTANT: replace with your actual postgres password (same one used in setup_database.py)
-DB_PASSWORD = "drivelegal"
+import urllib.parse
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 def find_violation_db(user_text: str):
-    """
-    Searches the PostgreSQL violations table for a keyword matching the user's text.
-    Returns a dictionary if found, otherwise None.
-    """
-    conn = psycopg2.connect(
-        host="localhost",
-        database="drivelegal",
-        user="postgres",
-        password=DB_PASSWORD,
-        port="5432"
-    )
+    # Use DATABASE_URL from environment (Render) or fall back to local config
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    else:
+        conn = psycopg2.connect(
+            host="localhost",
+            database="drivelegal",
+            user="postgres",
+            password=os.getenv("DB_PASSWORD", "drivelegal"),
+            port="5432"
+        )
     cursor = conn.cursor()
 
     cursor.execute("SELECT keyword, violation, fine, section, extra_penalty FROM violations")
