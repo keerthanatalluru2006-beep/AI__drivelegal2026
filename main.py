@@ -1,4 +1,5 @@
 import os
+from xml.parsers.expat import model
 import psycopg2
 import pytesseract
 from PIL import Image
@@ -6,7 +7,7 @@ from fastapi import File, UploadFile
 import io
 from violations_data import find_violation
 from dotenv import load_dotenv
-import google as genai
+import google.generativeai as genai
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -16,7 +17,7 @@ load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
 # Create a client to talk to Gemini
-client = genai.Client(api_key=api_key)
+genai.configure(api_key=api_key)
 # Tell pytesseract where Tesseract is installed on this Windows machine
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 # IMPORTANT: replace with your actual postgres password (same one used in setup_database.py)
@@ -118,10 +119,8 @@ def predict_fine(q: Question):
     {{"violation": "name of violation", "fine": "fine amount in rupees", "section": "relevant Motor Vehicles Act section", "extra_penalty": "any extra penalty or None"}}
     """
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=ai_prompt
-    )
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    response = model.generate_content("...")
 
     import json
     try:
