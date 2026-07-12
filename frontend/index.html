@@ -5,271 +5,56 @@
 <title>DriveLegal AI</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #0f172a;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 20px;
-  }
-
-  .app-container {
-    width: 100%;
-    max-width: 600px;
-    background: #1e293b;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-    display: flex;
-    flex-direction: column;
-    height: 85vh;
-  }
-
-  .app-header {
-    background: #16a34a;
-    color: white;
-    padding: 18px 24px;
-  }
-
-  .app-header h1 {
-    font-size: 20px;
-    font-weight: 600;
-  }
-
-  .app-header p {
-    font-size: 13px;
-    opacity: 0.9;
-    margin-top: 2px;
-  }
-
-  /* Tab buttons */
-  .tabs {
-    display: flex;
-    background: #16213e;
-    border-bottom: 1px solid #334155;
-  }
-
-  .tab-btn {
-    flex: 1;
-    padding: 14px;
-    background: none;
-    border: none;
-    color: #94a3b8;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-  }
-
-  .tab-btn.active {
-    color: #22c55e;
-    border-bottom: 3px solid #22c55e;
-  }
-
-  .tab-content {
-    flex: 1;
-    display: none;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .tab-content.active {
-    display: flex;
-  }
-
-  /* Chat tab styles */
-  .chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .message {
-    max-width: 80%;
-    padding: 12px 16px;
-    border-radius: 14px;
-    line-height: 1.45;
-    font-size: 14.5px;
-    white-space: pre-wrap;
-  }
-
-  .message.user {
-    background: #16a34a;
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-  }
-
-  .message.bot {
-    background: #334155;
-    color: #e2e8f0;
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-
-  .message.bot.loading {
-    color: #94a3b8;
-    font-style: italic;
-  }
-
-  .input-area {
-    display: flex;
-    padding: 16px;
-    background: #1e293b;
-    border-top: 1px solid #334155;
-    gap: 10px;
-  }
-
-  .input-area input {
-    flex: 1;
-    padding: 12px 16px;
-    border-radius: 24px;
-    border: none;
-    background: #334155;
-    color: white;
-    font-size: 14.5px;
-    outline: none;
-  }
-
-  .input-area input::placeholder {
-    color: #94a3b8;
-  }
-
-  .send-btn {
-    background: #16a34a;
-    color: white;
-    border: none;
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .send-btn:hover {
-    background: #15803d;
-  }
-
-  .send-btn:disabled {
-    background: #475569;
-    cursor: not-allowed;
-  }
-
-  /* Predictor tab styles */
-  .predictor-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .predictor-hint {
-    color: #94a3b8;
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .predictor-hint b {
-    color: #e2e8f0;
-  }
-
-  .result-card {
-    background: #334155;
-    border-radius: 14px;
-    padding: 18px;
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .result-card.show {
-    display: flex;
-  }
-
-  .result-row {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .result-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #94a3b8;
-    font-weight: 600;
-  }
-
-  .result-value {
-    font-size: 15px;
-    color: #f1f5f9;
-    line-height: 1.4;
-  }
-
-  .result-value.fine {
-    color: #4ade80;
-    font-size: 22px;
-    font-weight: 700;
-  }
-
-  .source-badge {
-    align-self: flex-start;
-    font-size: 10px;
-    padding: 3px 10px;
-    border-radius: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-
-  .source-badge.database {
-    background: #15803d;
-    color: white;
-  }
-
-  .source-badge.ai {
-    background: #7c3aed;
-    color: white;
-  }
-
-  .predictor-loading {
-    text-align: center;
-    color: #94a3b8;
-    font-style: italic;
-    padding: 20px;
-    display: none;
-  }
-
-  .predictor-loading.show {
-    display: block;
-  }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+  .app-container { width: 100%; max-width: 600px; background: #1e293b; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; height: 85vh; }
+  .app-header { background: #16a34a; color: white; padding: 18px 24px; }
+  .app-header h1 { font-size: 20px; font-weight: 600; }
+  .app-header p { font-size: 13px; opacity: 0.9; margin-top: 2px; }
+  #languageSelect { margin-top:10px; padding:6px 10px; border-radius:8px; border:none; background:rgba(255,255,255,0.2); color:white; font-size:13px; font-weight:600; }
+  #languageSelect option { color:black; background:white; }
+  .tabs { display: flex; background: #16213e; border-bottom: 1px solid #334155; }
+  .tab-btn { flex: 1; padding: 14px; background: none; border: none; color: #94a3b8; font-size: 14px; font-weight: 600; cursor: pointer; border-bottom: 3px solid transparent; }
+  .tab-btn.active { color: #22c55e; border-bottom: 3px solid #22c55e; }
+  .tab-content { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+  .tab-content.active { display: flex; }
+  .chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .message { max-width: 80%; padding: 12px 16px; border-radius: 14px; line-height: 1.45; font-size: 14.5px; white-space: pre-wrap; }
+  .message.user { background: #16a34a; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .message.bot { background: #334155; color: #e2e8f0; align-self: flex-start; border-bottom-left-radius: 4px; }
+  .message.loading { color: #94a3b8; font-style: italic; }
+  .input-area { display: flex; padding: 16px; background: #1e293b; border-top: 1px solid #334155; gap: 10px; }
+  .input-area input { flex: 1; padding: 12px 16px; border-radius: 24px; border: none; background: #334155; color: white; font-size: 14.5px; outline: none; }
+  .input-area input::placeholder { color: #94a3b8; }
+  .send-btn { background: #16a34a; color: white; border: none; width: 46px; height: 46px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .send-btn:hover { background: #15803d; }
+  .send-btn:disabled { background: #475569; cursor: not-allowed; }
+  .predictor-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  .hint { color: #94a3b8; font-size: 13px; line-height: 1.5; }
+  .hint b { color: #e2e8f0; }
+  .result-card { background: #334155; border-radius: 14px; padding: 18px; display: none; flex-direction: column; gap: 10px; }
+  .result-card.show { display: flex; }
+  .result-row { display: flex; flex-direction: column; gap: 2px; }
+  .result-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8; font-weight: 600; }
+  .result-value { font-size: 15px; color: #f1f5f9; line-height: 1.4; }
+  .fine-value { color: #4ade80; font-size: 22px; font-weight: 700; }
+  .badge { align-self: flex-start; font-size: 10px; padding: 3px 10px; border-radius: 10px; font-weight: 700; text-transform: uppercase; color: white; }
+  .badge-db { background: #15803d; }
+  .badge-ai { background: #7c3aed; }
+  .loading-text { text-align: center; color: #94a3b8; font-style: italic; padding: 20px; display: none; }
+  .loading-text.show { display: block; }
 </style>
 </head>
 <body>
-
 <div class="app-container">
+
   <div class="app-header">
     <h1>🚦 DriveLegal AI</h1>
     <p>Ask about traffic laws, fines, and your rights</p>
-    <select id="languageSelect" style="
-      margin-top:10px; padding:6px 10px; border-radius:8px; border:none;
-      background:rgba(255,255,255,0.2); color:white; font-size:13px; font-weight:600;
-    ">
-      <option value="English" style="color:black; background:white;">🇬🇧 English</option>
-      <option value="Hindi" style="color:black; background:white;">🇮🇳 हिन्दी (Hindi)</option>
-      <option value="Telugu" style="color:black; background:white;">🇮🇳 తెలుగు (Telugu)</option>
-      <option value="Tamil" style="color:black; background:white;">🇮🇳 தமிழ் (Tamil)</option>
+    <select id="languageSelect">
+      <option value="English">🇬🇧 English</option>
+      <option value="Hindi">🇮🇳 हिन्दी (Hindi)</option>
+      <option value="Telugu">🇮🇳 తెలుగు (Telugu)</option>
+      <option value="Tamil">🇮🇳 தமிழ் (Tamil)</option>
     </select>
   </div>
 
@@ -294,30 +79,14 @@
   <!-- PREDICTOR TAB -->
   <div class="tab-content" id="predictorTab">
     <div class="predictor-body">
-      <div class="predictor-hint">
-        Describe a traffic violation and get the <b>exact fine</b>, <b>legal section</b>, and any <b>extra penalty</b>. Try: "no helmet", "drunk driving", "overspeeding".
-      </div>
-
-      <div class="predictor-loading" id="predictorLoading">Checking violation database...</div>
-
-      <div class="result-card" id="resultCard">
-        <span class="source-badge" id="sourceBadge"></span>
-        <div class="result-row">
-          <span class="result-label">Violation</span>
-          <span class="result-value" id="resultViolation"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Fine</span>
-          <span class="result-value fine" id="resultFine"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Legal Section</span>
-          <span class="result-value" id="resultSection"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Extra Penalty</span>
-          <span class="result-value" id="resultExtra"></span>
-        </div>
+      <div class="hint">Describe a traffic violation and get the <b>exact fine</b>, <b>legal section</b>, and any <b>extra penalty</b>. Try: "no helmet", "drunk driving", "overspeeding".</div>
+      <div class="loading-text" id="predictorLoading">Checking violation...</div>
+      <div class="result-card" id="predictorCard">
+        <span class="badge" id="predictorBadge"></span>
+        <div class="result-row"><span class="result-label">Violation</span><span class="result-value" id="pViolation"></span></div>
+        <div class="result-row"><span class="result-label">Fine</span><span class="result-value fine-value" id="pFine"></span></div>
+        <div class="result-row"><span class="result-label">Legal Section</span><span class="result-value" id="pSection"></span></div>
+        <div class="result-row"><span class="result-label">Extra Penalty</span><span class="result-value" id="pExtra"></span></div>
       </div>
     </div>
     <div class="input-area">
@@ -326,369 +95,268 @@
       <button class="send-btn" id="predictorBtn">➤</button>
     </div>
   </div>
-<!-- CHALLAN ANALYZER TAB -->
+
+  <!-- CHALLAN TAB -->
   <div class="tab-content" id="challanTab">
     <div class="predictor-body">
-      <div class="predictor-hint">
-        Upload a photo of your traffic challan and get an <b>instant explanation</b> — violation, fine, legal section, and how to pay.
-      </div>
-
-      <input type="file" id="challanFileInput" accept="image/*" style="display:none;" />
-      <button id="uploadChallanBtn" style="
-        background:#334155; color:#e2e8f0; border:2px dashed #475569;
-        border-radius:12px; padding:24px; cursor:pointer; font-size:14px;
-      ">
-        📷 Click to upload challan photo
-      </button>
-
-      <img id="challanPreview" style="display:none; max-width:100%; border-radius:10px; margin-top:8px;" />
-
-      <div class="predictor-loading" id="challanLoading">Reading challan with OCR...</div>
-
-      <div class="result-card" id="challanResultCard">
-        <span class="source-badge" id="challanSourceBadge"></span>
-        <div class="result-row">
-          <span class="result-label">Violation</span>
-          <span class="result-value" id="challanViolation"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Fine</span>
-          <span class="result-value fine" id="challanFine"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Legal Section</span>
-          <span class="result-value" id="challanSection"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Extra Penalty</span>
-          <span class="result-value" id="challanExtra"></span>
-        </div>
-        <div class="result-row">
-          <span class="result-label">Payment Guidance</span>
-          <span class="result-value" id="challanPayment"></span>
-        </div>
+      <div class="hint">Upload a photo of your traffic challan and get an <b>instant explanation</b> — violation, fine, legal section, and how to pay.</div>
+      <input type="file" id="challanInput" accept="image/*" style="display:none;" />
+      <button id="uploadBtn" style="background:#334155;color:#e2e8f0;border:2px dashed #475569;border-radius:12px;padding:24px;cursor:pointer;font-size:14px;">📷 Click to upload challan photo</button>
+      <img id="challanPreview" style="display:none;max-width:100%;border-radius:10px;margin-top:8px;" />
+      <div class="loading-text" id="challanLoading">Reading challan with AI...</div>
+      <div class="result-card" id="challanCard">
+        <span class="badge badge-ai">✨ AI Analyzed</span>
+        <div class="result-row"><span class="result-label">Violation</span><span class="result-value" id="cViolation"></span></div>
+        <div class="result-row"><span class="result-label">Fine</span><span class="result-value fine-value" id="cFine"></span></div>
+        <div class="result-row"><span class="result-label">Legal Section</span><span class="result-value" id="cSection"></span></div>
+        <div class="result-row"><span class="result-label">Extra Penalty</span><span class="result-value" id="cExtra"></span></div>
+        <div class="result-row"><span class="result-label">Payment Guidance</span><span class="result-value" id="cPayment"></span></div>
       </div>
     </div>
   </div>
+
 </div>
-
 <script>
-  const ASK_URL = "https://ai-drivelegal2026-5.onrender.com/ask";
-  const PREDICT_URL = "https://ai-drivelegal2026-5.onrender.com/predict-fine";
+  const GEMINI_API_KEY = "AIzaSyB1kcRotJe8HAMBt6cAOg1OkTe-XEir5CQ";
+  const GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + GEMINI_API_KEY;
 
-  /* ---------- TAB SWITCHING ---------- */
-  const tabBtns = document.querySelectorAll(".tab-btn");
-  const tabContents = document.querySelectorAll(".tab-content");
+  const SYSTEM_PROMPT = "You are DriveLegal AI, an assistant that helps Indian citizens understand traffic laws, violations, fines, and their rights under the Motor Vehicles Act. Always answer clearly and simply, mention the exact fine amount in rupees if applicable, and cite the relevant section of law if you know it. Keep answers concise and easy to understand for someone with no legal background.";
 
-  tabBtns.forEach(btn => {
+  const DB = {
+    "no helmet": { violation:"Riding without a helmet", fine:"₹1,000", section:"Section 194D, Motor Vehicles Act, 1988", extra:"License disqualification for 3 months" },
+    "no seatbelt": { violation:"Driving without seatbelt", fine:"₹1,000", section:"Section 194B, Motor Vehicles Act, 1988", extra:"None" },
+    "triple riding": { violation:"Triple riding on a two-wheeler", fine:"₹1,000 (first), ₹2,000 (subsequent)", section:"Section 128 & 194C, Motor Vehicles Act, 1988", extra:"License disqualification possible" },
+    "red light": { violation:"Jumping a red light", fine:"₹1,000 to ₹5,000", section:"Section 184, Motor Vehicles Act, 1988", extra:"License disqualification possible" },
+    "drunk driving": { violation:"Driving under influence of alcohol", fine:"₹10,000 + imprisonment up to 6 months", section:"Section 185, Motor Vehicles Act, 1988", extra:"Imprisonment up to 2 years for repeat offence" },
+    "overspeeding": { violation:"Overspeeding", fine:"₹1,000 to ₹2,000", section:"Section 183, Motor Vehicles Act, 1988", extra:"License disqualification possible" },
+    "no license": { violation:"Driving without valid license", fine:"₹5,000", section:"Section 181, Motor Vehicles Act, 1988", extra:"Imprisonment possible" },
+    "phone": { violation:"Using mobile phone while driving", fine:"₹1,000 to ₹5,000", section:"Section 184, Motor Vehicles Act, 1988", extra:"License disqualification possible" },
+    "no insurance": { violation:"Driving without valid insurance", fine:"₹2,000 (first), ₹4,000 (subsequent)", section:"Section 196, Motor Vehicles Act, 1988", extra:"Imprisonment up to 3 months possible" },
+    "wrong side": { violation:"Driving on wrong side", fine:"₹1,000 to ₹5,000", section:"Section 177/184, Motor Vehicles Act, 1988", extra:"None" }
+  };
+
+  function getLang() { return document.getElementById("languageSelect").value; }
+
+  function findInDB(text) {
+    const lower = text.toLowerCase();
+    for (const [key, val] of Object.entries(DB)) {
+      if (lower.includes(key)) return val;
+    }
+    return null;
+  }
+
+  async function callGemini(prompt) {
+    const res = await fetch(GEMINI_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+    });
+    const data = await res.json();
+    return data.candidates[0].content.parts[0].text;
+  }
+
+  async function callGeminiWithImage(base64, mimeType, prompt) {
+    const res = await fetch(GEMINI_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{
+          parts: [
+            { inline_data: { mime_type: mimeType, data: base64 } },
+            { text: prompt }
+          ]
+        }]
+      })
+    });
+    const data = await res.json();
+    return data.candidates[0].content.parts[0].text;
+  }
+
+  /* TAB SWITCHING */
+  document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      tabBtns.forEach(b => b.classList.remove("active"));
-      tabContents.forEach(c => c.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
       btn.classList.add("active");
       document.getElementById(btn.dataset.tab + "Tab").classList.add("active");
     });
   });
 
-  /* ---------- CHAT TAB LOGIC ---------- */
+  /* CHAT TAB */
   const chatMessages = document.getElementById("chatMessages");
   const questionInput = document.getElementById("questionInput");
   const sendBtn = document.getElementById("sendBtn");
-    function formatText(text) {
-    const escaped = text
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;");
-    return escaped.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
+
+  function formatText(text) {
+    return text.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
   }
 
   function speakText(text) {
-    // Stop any currently playing speech first
     window.speechSynthesis.cancel();
-
-    const plainText = text.replace(/\*\*/g, "");
-    const utterance = new SpeechSynthesisUtterance(plainText);
-
-    const langMap = {
-      "English": "en-IN",
-      "Hindi": "hi-IN",
-      "Telugu": "te-IN",
-      "Tamil": "ta-IN"
-    };
-    const selectedLang = document.getElementById("languageSelect").value;
-    utterance.lang = langMap[selectedLang] || "en-IN";
-
-    window.speechSynthesis.speak(utterance);
+    const u = new SpeechSynthesisUtterance(text.replace(/\*\*/g,""));
+    const map = { English:"en-IN", Hindi:"hi-IN", Telugu:"te-IN", Tamil:"ta-IN" };
+    u.lang = map[getLang()] || "en-IN";
+    window.speechSynthesis.speak(u);
   }
 
   function addMessage(text, sender) {
-    const msgDiv = document.createElement("div");
-    msgDiv.classList.add("message", sender);
-    msgDiv.innerHTML = formatText(text);
-
+    const div = document.createElement("div");
+    div.classList.add("message", sender);
+    div.innerHTML = formatText(text);
     if (sender === "bot" && text !== "Thinking...") {
-      const speakBtn = document.createElement("button");
-      speakBtn.textContent = "🔊";
-      speakBtn.style.cssText = "margin-top:8px; background:none; border:none; color:#94a3b8; cursor:pointer; font-size:16px; display:block;";
-      speakBtn.onclick = () => speakText(text);
-      msgDiv.appendChild(speakBtn);
+      const btn = document.createElement("button");
+      btn.textContent = "🔊";
+      btn.style.cssText = "margin-top:8px;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:16px;display:block;";
+      btn.onclick = () => speakText(text);
+      div.appendChild(btn);
     }
-
-    chatMessages.appendChild(msgDiv);
+    chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-    return msgDiv;
+    return div;
   }
 
   async function sendQuestion() {
     const question = questionInput.value.trim();
     if (!question) return;
-
     addMessage(question, "user");
     questionInput.value = "";
     sendBtn.disabled = true;
-
-    const loadingMsg = addMessage("Thinking...", "bot");
-    loadingMsg.classList.add("loading");
-
+    const loading = addMessage("Thinking...", "bot");
+    loading.classList.add("loading");
     try {
-      const response = await fetch(ASK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: question, language: document.getElementById("languageSelect").value })
-      });
-      const data = await response.json();
-      loadingMsg.remove();
-      addMessage(data.answer, "bot");
-    } catch (error) {
-      loadingMsg.remove();
-      addMessage("Sorry, I couldn't connect to the server. Make sure the backend is running.", "bot");
+      const prompt = SYSTEM_PROMPT + "\n\nIMPORTANT: Respond entirely in " + getLang() + " language.\n\nUser question: " + question;
+      const answer = await callGemini(prompt);
+      loading.remove();
+      addMessage(answer, "bot");
+    } catch(e) {
+      loading.remove();
+      addMessage("Sorry, couldn't get a response. Please try again.", "bot");
     }
-
     sendBtn.disabled = false;
   }
 
   sendBtn.addEventListener("click", sendQuestion);
-  questionInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") sendQuestion();
-  });
+  questionInput.addEventListener("keypress", function(e) { if(e.key==="Enter") sendQuestion(); });
 
-  /* ---------- PREDICTOR TAB LOGIC ---------- */
+  /* PREDICTOR TAB */
   const predictorInput = document.getElementById("predictorInput");
   const predictorBtn = document.getElementById("predictorBtn");
   const predictorLoading = document.getElementById("predictorLoading");
-  const resultCard = document.getElementById("resultCard");
-  const sourceBadge = document.getElementById("sourceBadge");
-  const resultViolation = document.getElementById("resultViolation");
-  const resultFine = document.getElementById("resultFine");
-  const resultSection = document.getElementById("resultSection");
-  const resultExtra = document.getElementById("resultExtra");
+  const predictorCard = document.getElementById("predictorCard");
 
   async function predictFine() {
     const question = predictorInput.value.trim();
     if (!question) return;
-
     predictorBtn.disabled = true;
-    resultCard.classList.remove("show");
+    predictorCard.classList.remove("show");
     predictorLoading.classList.add("show");
-
     try {
-      const response = await fetch(PREDICT_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: question, language: document.getElementById("languageSelect").value })
-      });
-      const data = await response.json();
-
-      resultViolation.textContent = data.violation || "Unknown";
-      resultFine.textContent = data.fine || "N/A";
-      resultSection.textContent = data.section || "N/A";
-      resultExtra.textContent = data.extra_penalty || "None";
-
-      sourceBadge.textContent = data.source === "database" ? "📚 From Database" : "✨ AI Generated";
-      sourceBadge.className = "source-badge " + (data.source === "database" ? "database" : "ai");
-
-      resultCard.classList.add("show");
-    } catch (error) {
-      alert("Couldn't connect to the server. Make sure the backend is running.");
+      const local = findInDB(question);
+      if (local) {
+        document.getElementById("pViolation").textContent = local.violation;
+        document.getElementById("pFine").textContent = local.fine;
+        document.getElementById("pSection").textContent = local.section;
+        document.getElementById("pExtra").textContent = local.extra;
+        const badge = document.getElementById("predictorBadge");
+        badge.textContent = "📚 From Database";
+        badge.className = "badge badge-db";
+      } else {
+        const prompt = "A user described this traffic violation: \"" + question + "\"\nRespond ONLY in this exact JSON format, no markdown, write values in " + getLang() + " language:\n{\"violation\":\"name\",\"fine\":\"amount in rupees\",\"section\":\"MV Act section\",\"extra_penalty\":\"penalty or None\"}";
+        const text = await callGemini(prompt);
+        const data = JSON.parse(text.replace(/```json|```/g,"").trim());
+        document.getElementById("pViolation").textContent = data.violation;
+        document.getElementById("pFine").textContent = data.fine;
+        document.getElementById("pSection").textContent = data.section;
+        document.getElementById("pExtra").textContent = data.extra_penalty;
+        const badge = document.getElementById("predictorBadge");
+        badge.textContent = "✨ AI Generated";
+        badge.className = "badge badge-ai";
+      }
+      predictorCard.classList.add("show");
+    } catch(e) {
+      alert("Error getting response. Please try again.");
     }
-
     predictorLoading.classList.remove("show");
     predictorBtn.disabled = false;
   }
 
   predictorBtn.addEventListener("click", predictFine);
-  predictorInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") predictFine();
+  predictorInput.addEventListener("keypress", function(e) { if(e.key==="Enter") predictFine(); });
+
+  /* CHALLAN TAB */
+  document.getElementById("uploadBtn").addEventListener("click", function() {
+    document.getElementById("challanInput").click();
   });
-  /* ---------- CHALLAN ANALYZER TAB LOGIC ---------- */
-  const ANALYZE_URL = "https://ai-drivelegal2026-5.onrender.com/analyze-challan";
 
-  const challanFileInput = document.getElementById("challanFileInput");
-  const uploadChallanBtn = document.getElementById("uploadChallanBtn");
-  const challanPreview = document.getElementById("challanPreview");
-  const challanLoading = document.getElementById("challanLoading");
-  const challanResultCard = document.getElementById("challanResultCard");
-  const challanSourceBadge = document.getElementById("challanSourceBadge");
-  const challanViolation = document.getElementById("challanViolation");
-  const challanFine = document.getElementById("challanFine");
-  const challanSection = document.getElementById("challanSection");
-  const challanExtra = document.getElementById("challanExtra");
-  const challanPayment = document.getElementById("challanPayment");
-
-  uploadChallanBtn.addEventListener("click", () => challanFileInput.click());
-
-  challanFileInput.addEventListener("change", async () => {
-    const file = challanFileInput.files[0];
+  document.getElementById("challanInput").addEventListener("change", async function() {
+    const file = this.files[0];
     if (!file) return;
-
-    // Show image preview
-    challanPreview.src = URL.createObjectURL(file);
-    challanPreview.style.display = "block";
-
-    challanResultCard.classList.remove("show");
-    challanLoading.classList.add("show");
-
-    const formData = new FormData();
-    formData.append("file", file);
-
+    const preview = document.getElementById("challanPreview");
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
+    document.getElementById("challanCard").classList.remove("show");
+    document.getElementById("challanLoading").classList.add("show");
     try {
-      const response = await fetch(ANALYZE_URL, {
-        method: "POST",
-        body: formData
+      const base64 = await new Promise(function(resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = function() { resolve(reader.result.split(",")[1]); };
+        reader.onerror = function() { reject(new Error("Read failed")); };
+        reader.readAsDataURL(file);
       });
-      const data = await response.json();
-
-      if (data.error) {
-        alert(data.error);
-      } else {
-        challanViolation.textContent = data.violation || "Unknown";
-        challanFine.textContent = data.fine || "N/A";
-        challanSection.textContent = data.section || "N/A";
-        challanExtra.textContent = data.extra_penalty || "None";
-        challanPayment.textContent = data.payment_guidance || "Visit echallan.parivahan.gov.in";
-
-        challanSourceBadge.textContent = data.source === "database" ? "📚 From Database" : "✨ AI Generated";
-        challanSourceBadge.className = "source-badge " + (data.source === "database" ? "database" : "ai");
-
-        challanResultCard.classList.add("show");
-
-        // Speak the result aloud
-        const summary = `Violation: ${data.violation}. Fine: ${data.fine}. ${data.extra_penalty && data.extra_penalty !== "None" ? "Extra penalty: " + data.extra_penalty + "." : ""}`;
-        speakText(summary);
-      }
-    } catch (error) {
-      alert("Couldn't connect to the server. Make sure the backend is running.");
+      const prompt = "This is an Indian traffic challan image. Identify the violation shown and respond ONLY in this exact JSON format, no markdown:\n{\"violation\":\"name of violation\",\"fine\":\"fine amount in rupees\",\"section\":\"relevant Motor Vehicles Act section\",\"extra_penalty\":\"any extra penalty or None\",\"payment_guidance\":\"how to pay this challan in India\"}";
+      const text = await callGeminiWithImage(base64, file.type, prompt);
+      const result = JSON.parse(text.replace(/```json|```/g,"").trim());
+      document.getElementById("cViolation").textContent = result.violation;
+      document.getElementById("cFine").textContent = result.fine;
+      document.getElementById("cSection").textContent = result.section;
+      document.getElementById("cExtra").textContent = result.extra_penalty;
+      document.getElementById("cPayment").textContent = result.payment_guidance || "Pay via echallan.parivahan.gov.in";
+      document.getElementById("challanCard").classList.add("show");
+    } catch(e) {
+      alert("Could not analyze challan. Please try a clearer image.");
     }
-
-    challanLoading.classList.remove("show");
+    document.getElementById("challanLoading").classList.remove("show");
   });
-  /* ---------- VOICE INPUT (Speech-to-Text) ---------- */
+
+  /* VOICE - CHAT */
   const micBtn = document.getElementById("micBtn");
   let isListening = false;
-  let recognition = null;
-
   if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognition = new SpeechRecognition();
-    recognition.continuous = false;
-    recognition.interimResults = false;
-
-    recognition.onstart = () => {
-      isListening = true;
-      micBtn.style.background = "#dc2626";
-      micBtn.textContent = "⏹️";
-    };
-
-    recognition.onend = () => {
-      isListening = false;
-      micBtn.style.background = "#475569";
-      micBtn.textContent = "🎤";
-    };
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      questionInput.value = transcript;
-    };
-
-    recognition.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      isListening = false;
-      micBtn.style.background = "#475569";
-      micBtn.textContent = "🎤";
-    };
-
-    micBtn.addEventListener("click", () => {
-      if (isListening) {
-        recognition.stop();
-        return;
-      }
-      const langMap = {
-        "English": "en-IN",
-        "Hindi": "hi-IN",
-        "Telugu": "te-IN",
-        "Tamil": "ta-IN"
-      };
-      const selectedLang = document.getElementById("languageSelect").value;
-      recognition.lang = langMap[selectedLang] || "en-IN";
-      recognition.start();
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const rec = new SR();
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.onstart = function() { isListening=true; micBtn.style.background="#dc2626"; micBtn.textContent="⏹️"; };
+    rec.onend = function() { isListening=false; micBtn.style.background="#475569"; micBtn.textContent="🎤"; };
+    rec.onresult = function(e) { questionInput.value = e.results[0][0].transcript; };
+    rec.onerror = function() { isListening=false; micBtn.style.background="#475569"; micBtn.textContent="🎤"; };
+    micBtn.addEventListener("click", function() {
+      if (isListening) { rec.stop(); return; }
+      const map = { English:"en-IN", Hindi:"hi-IN", Telugu:"te-IN", Tamil:"ta-IN" };
+      rec.lang = map[getLang()] || "en-IN";
+      rec.start();
     });
-  } else {
-    micBtn.style.display = "none";
-    console.warn("Speech recognition not supported in this browser.");
-  /* ---------- VOICE INPUT for Fine Predictor ---------- */
-  }
+  } else { micBtn.style.display="none"; }
+
+  /* VOICE - PREDICTOR */
   const predictorMicBtn = document.getElementById("predictorMicBtn");
-  let isListeningPredictor = false;
-  let recognitionPredictor = null;
-
+  let isListeningP = false;
   if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    recognitionPredictor = new SpeechRecognition();
-    recognitionPredictor.continuous = false;
-    recognitionPredictor.interimResults = false;
-
-    recognitionPredictor.onstart = () => {
-      isListeningPredictor = true;
-      predictorMicBtn.style.background = "#dc2626";
-      predictorMicBtn.textContent = "⏹️";
-    };
-
-    recognitionPredictor.onend = () => {
-      isListeningPredictor = false;
-      predictorMicBtn.style.background = "#475569";
-      predictorMicBtn.textContent = "🎤";
-    };
-
-    recognitionPredictor.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      predictorInput.value = transcript;
-    };
-
-    recognitionPredictor.onerror = (event) => {
-      console.error("Speech recognition error:", event.error);
-      isListeningPredictor = false;
-      predictorMicBtn.style.background = "#475569";
-      predictorMicBtn.textContent = "🎤";
-    };
-
-    predictorMicBtn.addEventListener("click", () => {
-      if (isListeningPredictor) {
-        recognitionPredictor.stop();
-        return;
-      }
-      const langMap = {
-        "English": "en-IN",
-        "Hindi": "hi-IN",
-        "Telugu": "te-IN",
-        "Tamil": "ta-IN"
-      };
-      const selectedLang = document.getElementById("languageSelect").value;
-      recognitionPredictor.lang = langMap[selectedLang] || "en-IN";
-      recognitionPredictor.start();
+    const SR2 = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const rec2 = new SR2();
+    rec2.continuous = false;
+    rec2.interimResults = false;
+    rec2.onstart = function() { isListeningP=true; predictorMicBtn.style.background="#dc2626"; predictorMicBtn.textContent="⏹️"; };
+    rec2.onend = function() { isListeningP=false; predictorMicBtn.style.background="#475569"; predictorMicBtn.textContent="🎤"; };
+    rec2.onresult = function(e) { predictorInput.value = e.results[0][0].transcript; };
+    rec2.onerror = function() { isListeningP=false; predictorMicBtn.style.background="#475569"; predictorMicBtn.textContent="🎤"; };
+    predictorMicBtn.addEventListener("click", function() {
+      if (isListeningP) { rec2.stop(); return; }
+      const map = { English:"en-IN", Hindi:"hi-IN", Telugu:"te-IN", Tamil:"ta-IN" };
+      rec2.lang = map[getLang()] || "en-IN";
+      rec2.start();
     });
-  } else {
-    predictorMicBtn.style.display = "none";
-  }
+  } else { predictorMicBtn.style.display="none"; }
 </script>
-
 </body>
 </html>
